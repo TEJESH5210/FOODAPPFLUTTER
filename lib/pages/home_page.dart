@@ -5,6 +5,7 @@ import 'package:app_food_delivery/core/flutter_icons.dart';
 import 'package:app_food_delivery/models/food_model.dart';
 import 'package:app_food_delivery/pages/detail_page.dart';
 import 'package:app_food_delivery/widgets/app_clipper.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'dart:math' as math;
@@ -22,20 +23,30 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Owner Shop Name"),
+        leadingWidth: 80,
+        backgroundColor: Colors.green[600],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
+      ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 60),
+              padding: EdgeInsets.only(left: 30),
               child: _buildRightSection(),
             ),
             Container(
               color: AppColors.greenColor,
               height: MediaQuery.of(context).size.height,
-              width: 60,
-              padding: EdgeInsets.only(top: 25),
+              width: 40,
+              padding: EdgeInsets.only(top: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -47,9 +58,6 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
                       ),
-                      image: DecorationImage(
-                        image: ExactAssetImage("assets/profile.jpg"),
-                      ),
                     ),
                   ),
                   Container(
@@ -60,10 +68,7 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
                       ),
-                      color: Colors.white,
-                    ),
-                    child: Center(
-                      child: Icon(FlutterIcons.menu),
+                      color: AppColors.greenColor,
                     ),
                   ),
                 ],
@@ -78,18 +83,13 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Row(
-                      children: <Widget>[
-                        _buildMenu("Vegetables", 0),
-                        _buildMenu("Chicken", 1),
-                        _buildMenu("Beef", 2),
-                        _buildMenu("Thai", 3),
-                      ],
+                      children: <Widget>[],
                     ),
                     AnimatedContainer(
                       duration: Duration(milliseconds: 250),
                       margin: EdgeInsets.only(left: paddingLeft),
                       width: 150,
-                      height: 75,
+                      height: 55,
                       child: Stack(
                         children: <Widget>[
                           Align(
@@ -100,19 +100,6 @@ class _HomePageState extends State<HomePage> {
                                 width: 150,
                                 height: 60,
                                 color: AppColors.greenColor,
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Transform.rotate(
-                              angle: math.pi / 2,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 40),
-                                child: Icon(
-                                  FlutterIcons.arrow,
-                                  size: 16,
-                                ),
                               ),
                             ),
                           ),
@@ -153,7 +140,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildRightSection() {
     return Padding(
-      padding: const EdgeInsets.only(top: 25),
+      padding: const EdgeInsets.only(top: 40),
       child: Column(
         children: <Widget>[
           _customAppBar(),
@@ -176,18 +163,18 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 40),
+                          padding: const EdgeInsets.only(right: 1),
                           child: Stack(
                             children: <Widget>[
                               _buildBackGround(index),
                               Align(
-                                alignment: Alignment.topRight,
+                                alignment: Alignment.topCenter,
                                 child: Transform.rotate(
                                   angle: math.pi / 3,
                                   child: Hero(
                                     tag: "image${foodList[index].imgPath}",
                                     child: Image(
-                                      width: 180,
+                                      width: 200,
                                       image: AssetImage(
                                           "assets/${foodList[index].imgPath}"),
                                     ),
@@ -196,12 +183,12 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Positioned(
                                 bottom: 0,
-                                right: 30,
+                                right: 60,
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: AppColors.redColor,
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
+                                      Radius.circular(25),
                                     ),
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -227,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: EdgeInsets.only(left: 40),
                   child: Text(
-                    "Popular",
+                    "Popular Items",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
@@ -248,13 +235,13 @@ class _HomePageState extends State<HomePage> {
       margin: EdgeInsets.only(
         top: 50,
         bottom: 20,
-        right: 50,
+        right: 70,
       ),
       padding: EdgeInsets.all(28),
       decoration: BoxDecoration(
         color: AppColors.greenColor,
         borderRadius: BorderRadius.all(
-          Radius.circular(32),
+          Radius.circular(42),
         ),
       ),
       child: Column(
@@ -269,7 +256,7 @@ class _HomePageState extends State<HomePage> {
                 direction: Axis.horizontal,
                 allowHalfRating: true,
                 itemCount: 5,
-                itemSize: 16  ,
+                itemSize: 10,
                 unratedColor: Colors.black12,
                 itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
                 itemBuilder: (context, _) => Icon(
@@ -282,9 +269,9 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(width: 10),
               Text(
-                "(120 Reviews)",
+                "(120 views)",
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -378,9 +365,9 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(color: Colors.black),
               children: [
                 TextSpan(
-                  text: "Shailee Weedly",
+                  text: "Name After Login",
                   style: TextStyle(
-                    color: AppColors.greenColor,
+                    color: Colors.red,
                     fontWeight: FontWeight.bold,
                     height: 1.5,
                   ),
@@ -388,10 +375,10 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 10),
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 26),
               decoration: BoxDecoration(
                 color: AppColors.greenLightColor,
                 borderRadius: BorderRadius.all(
@@ -416,7 +403,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 5),
           Container(
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
@@ -427,8 +414,8 @@ class _HomePageState extends State<HomePage> {
             ),
             child: Center(
               child: Icon(
-                FlutterIcons.shop,
-                size: 16,
+                Icons.admin_panel_settings_sharp,
+                size: 26,
               ),
             ),
           )
