@@ -23,13 +23,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Owner Shop Name"),
-        leadingWidth: 80,
-        backgroundColor: Colors.green[600],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(95),
+        child: AppBar(
+          centerTitle: true,
+          title: Text(
+            "\nowner shop name",
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+          ),
+          backgroundColor: Colors.green[500],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(50),
+                bottomLeft: Radius.circular(50)),
           ),
         ),
       ),
