@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(95),
+        preferredSize: Size.fromHeight(80),
         child: AppBar(
           centerTitle: true,
           title: Text(
